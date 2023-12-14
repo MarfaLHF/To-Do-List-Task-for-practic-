@@ -1,0 +1,32 @@
+﻿@model ToDoList.Data.Models.UserDTO
+
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="container">
+        <h2>Авторизация</h2>
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <p style="color: red;">@ViewData["ErrorMessage"]</p>
+        }
+
+        <form asp-action="Login" method="post">
+            <div class="form-group">
+                <label asp-for="Username">Имя пользователя</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password">Пароль</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-outline-primary me-2">Авторизоваться</button>
+            <a type="button" class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="Registration">Зарегистрироваться</a>
+        </form>
+    </div>
+</body>
+</html>

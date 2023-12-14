@@ -1,0 +1,113 @@
+﻿@using ToDoList.Data.Models
+@model IEnumerable<ToDoList.Data.Models.Task>
+
+@{
+    ViewData["Title"] = "Home Page";
+    var userId = ViewData["userId"];
+}
+
+
+
+<div class="container">
+    <h1>Список задач</h1>
+    <div class="mt-4 mb-4">
+       
+        <a class="btn btn-primary" asp-action="CreateTask" asp-route-id="@userId">Добавить задачу</a>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered mt-4 mb-4">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Время выполнения</th>
+                    <th>Приоритет</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var task in Model.Where(t => !t.IsCompleted))
+                {
+                    <tr>
+                        <td>@task.Title</td>
+                        <td>@task.Description</td>
+                        <td>@task.Deadline</td>
+                        <td>
+                            @if (task.Priority == 1)
+                            {
+                                <span>Высокий</span>
+                            }
+                            else if (task.Priority == 2)
+                            {
+                                <span>Средний</span>
+                            }
+                            else if (task.Priority == 3)
+                            {
+                                <span>Низкий</span>
+                            }
+                            else
+                            {
+                                <span>Неопределен</span>
+                            }
+                        </td>
+                        <td>@(task.IsCompleted ? "Выполнен" : "Не выполнен")</td>
+                        <td>
+                            <a  asp-action="TaskDetails" asp-route-id="@task.Id">Подробнее</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h2>История</h2>
+        <table class="table table-bordered mt-4 mb-4">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Время выполнения</th>
+                    <th>Приоритет</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var task in Model.Where(t => t.IsCompleted))
+                {
+                    <tr>
+                        <td>@task.Title</td>
+                        <td>@task.Description</td>
+                        <td>@task.Deadline</td>
+                        <td>
+                            @if (task.Priority == 1)
+                            {
+                                <span>Высокий</span>
+                            }
+                            else if (task.Priority == 2)
+                            {
+                                <span>Средний</span>
+                            }
+                            else if (task.Priority == 3)
+                            {
+                                <span>Низкий</span>
+                            }
+                            else
+                            {
+                                <span>Неопределен</span>
+                            }
+                        </td>
+                        <td>@(task.IsCompleted ? "Выполнен" : "Не выполнен")</td>
+                        <td>
+                            <a asp-action="TaskDetails" asp-route-id="@task.Id">Подробнее</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Задач нет</p>
+    }
+</div>

@@ -1,0 +1,16 @@
+﻿<!-- Views/Home/Index.cshtml -->
+@{
+    ViewData["Title"] = "Необходимо зарегистрироваться";
+}
+
+<div class="jumbotron text-center">
+    <h1 class="display-4">Необходимо зарегистрироваться</h1>
+    <p class="lead">Для доступа к дополнительным функциям, пожалуйста, выполните вход.</p>
+    <hr class="my-4">
+    <p class="lead">
+        <div class="d-inline-flex justify-content-center">
+            <a type="button" class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="Login">Авторизоваться</a>
+            <a type="button" class="btn btn-warning" asp-controller="Account" asp-action="Registration">Зарегистрироваться</a>
+        </div>
+    </p>
+</div>
